@@ -1,0 +1,80 @@
+{% load static %}
+{% load content_tags %}
+{% load discussion_tags %}
+
+{% for discussion in discussions_list %}
+    <div class="discussion_body">
+        <div class="row">
+            <div class="owner_info col col-2 mx-2 mx-md-0 py-2 mx-md-0 text-center">
+                <img class="owner_icon" src="{{ discussion.user.avatar.url }}"/>
+            </div>
+
+            <div class="discussion_info col col-8 col-md-9 pl-4 pl-md-2">
+                <div class="discussion_title">
+                    {% url 'Discussion:discussion_detail' discussion.pk as discussion_url %}
+                    <a class="book_link" href="{{ discussion_url }}">
+                        {{ discussion.title }}
+                    </a>
+                </div>
+
+                {% if in_search %}
+                    <div class="discussion_article">
+                        {{ discussion.body|truncatechars:"150" }}
+                    </div>
+                {% endif %}
+
+                <div class="discussion_related text-muted">
+                    <small>
+                        <span class="discussion_book_name">
+                            <a class="book_link" href="{% url 'Content:book' slug=discussion.book.slug %}">
+                                {{ discussion.book.name }}
+                            </a>
+                        </span>
+
+                        <span class="span_separate">•</span>
+
+                        <span class="discussion_owner_name">
+                            <a class="discussion_user_link" href="{% url 'User:user' slug=discussion.user.slug %}">
+                            {{ discussion.user.username }}
+                            </a>
+                        </span>
+
+                        <span class="span_separate">•</span>
+
+                        <span class="discussion_pub_date">
+                            {{ discussion.pub_date|timesince }}
+                        </span>
+
+                        <span class="span_separate">•</span>
+
+                        <span class="discussion_last_reply">
+                            {% get_discussion_replys discussion "-pub_date" 1 as last_reply %}
+                            {% if last_reply %}
+                                <span class="last_reply_label">最后一个回复：</span>
+                                <span class="last_reply_name">
+                                    <a class="discussion_user_link" href="{% url 'User:user' slug=discussion.user.slug %}">
+                                        {{ last_reply.0.user.username }}
+                                    </a>
+                                </span>
+                            {% else %}
+
+                            {% endif %}
+                        </span>
+
+                    </small>
+                </div>
+            </div>
+
+            <div class="col col-1">
+                <!-- 这个讨论回复的数量 -->
+                <span class="reply_count badge badge-lg badge-secondary">
+                    {% get_replys_number discussion %}
+                </span>
+            </div>
+        </div>
+    </div>
+{% empty %}
+    <p class="lead text-center mt-4">
+        这儿还没有任何东西，去别的地方看看吧。
+    </p>
+{% endfor %}

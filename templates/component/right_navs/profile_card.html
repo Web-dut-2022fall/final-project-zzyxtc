@@ -1,0 +1,63 @@
+{% load static %}
+{% load discussion_tags %}
+
+<!-- 个人资料边栏 -->
+<div class="profile_nav per_right_nav">
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <a class="right_nav_user_link col" href="{% url 'User:user' slug=user.slug %}">
+                    <img class="right_nav_user_avatar" src="{{ user.avatar.url }}"/>
+                    <span class="right_nav_user_name align-content-center">{{ user.username }}</span>
+                </a>
+                {% unread_notifies_num user as unread_num %}
+                {% url 'Discussion:notifications' as noti_url %}
+                <a class="right_nav_unread_notify {% if unread_num != 0 and request.path != noti_url %}has-notify{% else %}no-notify{% endif %}"
+                   href="{% url 'Discussion:notifications' %}">
+                    <img class="right_nav_unread_icon" src="{% static 'Content/img/icon/notify.png' %}"/>
+                    <span class="unread_num">{{ unread_num }}</span>
+                </a>
+            </div>
+            <div class="row mt-2 ml-1 justify-content-center">
+                <div class="add_node text-muted">
+                    <span class="add_node_text">
+                        没有你想要的节点？
+                        <a class="add_node_link" href="{% url 'Content:add_node' %}">点击这里</a>
+                            增加节点
+                    </span>
+                </div>
+            </div>
+            <div class="row collections justify-content-center mt-2">
+                <div class="btn-group">
+                    <a class="btn btn-outline-info" href="{% url 'Content:collection_books' %}">
+                        （{{ user.collection.books.count }}）收藏的书籍
+                        <a class="btn btn-outline-info" href="{% url 'Discussion:collection_discussions' %}">
+                            ({{ user.collection.discussions.count }}) 收藏的话题
+                        </a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="row">
+                <p class="lead">
+                    很高兴见到你！
+                </p>
+                <p class="lead">
+                    欢迎来到本论坛。在这里，你可以自由分享你的书籍，或者是与他人交流。
+                    你可分享自己感兴趣的内容。或者是收藏自己喜欢的书籍、关注自己感兴趣的用户，并随时获取他们的动态。
+                </p>
+                <p class="lead">
+                    请点击
+                    <a class="" href="{% url 'User:login' %}">登录</a>
+                    以享受更多的功能。
+                </p>
+                <p class="lead">
+                    还没有账号？点击
+                    <a href="{% url 'User:register' %}">注册</a>
+                    立即加入我们！
+                </p>
+            </div>
+        </div>
+    {% endif %}
+</div>

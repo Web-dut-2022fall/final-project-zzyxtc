@@ -1,0 +1,75 @@
+{% load static %}
+<div class="container-fluid mx-0 px-0">
+    <!-- navbar's brand -->
+    <nav class="navbar navbar-light navbar-expand-md navbar-fixed-top border border-grey bg-white pb-2" id="nav-show">
+        <a class="navbar-brand ml-sm-0 ml-md-5" href="{% url 'Content:index' %}">
+            <img class="nav-brand-img" src="{% static 'Content/img/logo.png' %}" alt="" style="max-width:25px"> <i class="nav-brand-text">Share</i>
+        </a>
+
+        <button type="button" class="navbar-toggler btn" data-toggle="collapse" data-target="#navbar" >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse mr-sm-0 mr-md-6" id="navbar">
+            <div class="navbar-nav mr-auto">
+                <form class="form-inline mx-2 rounded-2" method="GET" action="{% url 'Discussion:haystack_search' %}">
+                    <div class="input-group">
+                        <input type="search" class="form-control nav-search" name="q" placeholder="搜索" />
+                        <input type="submit" class="input-group-append btn btn-info" value="搜索" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="navbar-nav ml-auto">
+                {% url 'Content:index' as index_url %}
+                <a class="nav-item nav-link nav-text {% if request.path == index_url %} active {% endif %} mx-1" href="{{ index_url }}">
+                    <img class="nav-icon" src="{% static "Content/img/icon/home.png"  %}" alt="home" />
+                    <span class="nav-home">首页</span>
+                </a>
+
+                {% if not user.is_authenticated %}
+                    {% url 'User:login' as login_url %}
+                    <a class="nav-item nav-link nav-text {% if request.path == login_url %} active {% endif %}mx-1"
+                       href="{{ login_url }}">
+                        <img class="nav-icon" src="{% static "Content/img/icon/login.png" %}" alt="login"/>
+                        <span class="nav-login">登陆</span>
+                    </a>
+
+                    {% url 'User:register' as register_url %}
+                    <a class="nav-item nav-link nav-text {% if request.path == register_url %} active {% endif %} mx-1"
+                       href="{{ register_url }}">
+                        <img class="nav-icon" src="{% static "Content/img/icon/register.png" %}" alt="register"/>
+                        <span class="nav-register">注册</span>
+                    </a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    {% url 'User:profile' as profile_url %}
+                    {% url 'User:user' slug=user.slug as user_url %}
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            <img class="nav-icon nav-text" src="{% static 'Content/img/icon/profile.png' %}"
+                                 alt="profile"/>
+                            <span class="nav-user nav-text">用户面板</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ user_url }}">个人页面</a>
+                            <a class="dropdown-item" href="{{ profile_url }}">个人设置</a>
+                            {% if user.is_staff %}
+                                {% url 'admin:index' as admin_url %}
+                                <a class="dropdown-item" href="{{ admin_url }}">后台管理</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% url 'User:logout' as logout_url %}
+                    <a class="nav-item nav-link nav-text {% if request.path == logout_url %} active {% endif %} max-1"
+                       href="{{ logout_url }}">
+                        <img class="nav-icon" src="{% static "Content/img/icon/logout.png" %}" alt="logout"/>
+                        <span class="nav-logout">登出</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</div>
