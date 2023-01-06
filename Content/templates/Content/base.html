@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <!-- metatags -->
+    {% block metatags %}
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% endblock %}
+
+    <!-- site decription -->
+    <title>{% block title %} Index {% endblock %}</title>
+
+    <!-- resource link -->
+    <link rel="shortcut icon" href="{% static 'Content/img/Favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'Content/img/Favicon.ico' %}" type="imgae/x-icon" />
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'Content/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'Content/css/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'Content/css/footer.css' %}" />
+    {% endblock %}
+</head>
+<body style="background-color: whitesmoke">
+
+<header style="position: fixed;width: 100%;top: 0;z-index: 9999">
+    <!-- site's common navbar -->
+    {% include 'component/navbar.html' %}
+</header>
+
+<section style="max-width:1500px;margin:auto;margin-top: 60px">
+    <!-- show messages -->
+    <div class="container mt-1">
+        {% include 'component/messages.html' %}
+    </div>
+
+    <!-- main content of the page -->
+    {% block main %}
+    {% endblock %}
+</section>
+
+<img src="{% static 'Content/img/icon/top.png' %}" id='back'/>
+
+<footer>
+    <!-- site's footer -->
+    {% include "component/footer.html" %}
+</footer>
+
+{% block scripts %}
+    <script src="{% static 'Content/js/jquery-3.3.1.min.js' %}" ></script>
+    <script src="{% static 'Content/js/popper.min.js' %}" ></script>
+    <script src="{% static 'Content/js/bootstrap.min.js' %}" ></script>
+    <script src="{% static 'Content/js/app.js' %}" ></script>
+{% endblock %}
+</body>
+</html>

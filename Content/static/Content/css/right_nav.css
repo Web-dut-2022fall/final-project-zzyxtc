@@ -1,0 +1,122 @@
+.right_nav {
+    position: static;
+    margin-top: 25px;
+}
+
+.per_right_nav {
+    background-color: white;
+    padding: 15px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.right_nav_icon {
+    max-height: 20px;
+    margin-bottom: 7px;
+}
+
+.right_nav_title {
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: 5px;
+    letter-spacing: 3px;
+}
+
+.right_nav_header_content {
+    border-bottom: 2px solid #66ccff;
+    padding-bottom: 10px;
+}
+
+.list-group {
+    margin-top: 6px;
+}
+
+.right_book_info {
+    float:right;
+}
+
+.right_item_icon {
+    max-height: 15px;
+    position: relative;
+    left: -16px;
+}
+
+.right_item_title {
+    position: relative;
+    left: -12px;
+    color: black;
+}
+
+.tag_cloud_content {
+    border-top: 1px solid lightgrey;
+    margin-top: 5px;
+    z-index: 100;
+    padding-top: 10px;
+}
+
+.right_tag {
+    margin: 3px;
+}
+
+.more {
+}
+
+.more_link {
+    color: black;
+}
+
+.nav_link {
+    text-decoration: none !important;
+}
+
+.right_nav_user_avatar {
+    max-width: 50px;
+    border-radius: 360px;
+    transition: 1s;;
+}
+
+.right_nav_user_avatar:hover {
+    transform: rotate(720deg) !important;
+    -webkit-transform: rotate(720deg) !important;
+    -moz-transform: rotate(720deg) !important;
+}
+
+.right_nav_user_name {
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.right_nav_user_link {
+    text-decoration: none !important;
+    color: grey;
+}
+
+.add_node_text {
+    font-size: smaller;
+}
+
+.add_node_link {
+    text-decoration: none !important;
+    color: grey;
+}
+
+.right_nav_unread_notify {
+    margin-top: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+.no-notify {
+    color: black
+}
+
+.has-notify{
+    color: #66ccff;
+    font-size: larger;
+}
+
+.unread_num {
+    display: inline-block;
+    margin-top: 3px;
+}

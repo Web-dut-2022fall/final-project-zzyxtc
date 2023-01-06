@@ -1,0 +1,42 @@
+{% extends 'Content/base.html' %}
+{% load static %}
+{% load content_tags %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'Content/css/book_list.css' %}"/>
+    <link rel="stylesheet" href="{% static 'Content/css/right_nav.css' %}"/>
+    <link rel="stylesheet" href="{% static 'Content/css/index_switch.css' %}"/>
+    <link rel="stylesheet" href="{% static 'Content/css/carousel.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    首页
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <div class="row mx-sm-0 mx-md-5 px-sm-1 px-md-5">
+            {% block content-fluid %}
+                <div class="col col-12 col-xl-8">
+                    {% block content %}
+                        <div id="left_content">
+                            {% show_carousel %}
+                            {% include 'component/index_switch.html' %}
+                            {% show_books object_list %}
+                            {% paginate paginator page_obj %}
+                        </div>
+                    {% endblock %}
+                </div>
+
+                <div class="col col-12 col-xl-4">
+                    {% block right-nav %}
+                        <div class="wrap-right-nav">
+                            {% include 'component/right_nav_index.html' %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
