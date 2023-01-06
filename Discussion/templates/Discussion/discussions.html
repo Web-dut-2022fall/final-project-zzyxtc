@@ -1,0 +1,23 @@
+{% extends 'Content/index.html' %}
+{% load static %}
+{% load content_tags %}
+{% load discussion_tags %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'Discussion/css/discussion_list.css' %}"/>
+{% endblock %}
+
+{% block title %}
+    Discussions
+{% endblock %}
+
+{% block content %}
+    <
+    <div id="left_content">
+        {% show_carousel %}
+        {% include 'component/index_switch.html' %}
+        {% show_discussions object_list %}
+        {% paginate paginator page_obj %}
+    </div>
+{% endblock %}
